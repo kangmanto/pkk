@@ -14,6 +14,7 @@ use App\Reports\Security\ScopeGuard;
 use App\Reports\Support\DefaultUserContextResolver;
 use App\Reports\Support\FilterNormalizer;
 use App\Reports\Support\MetadataFactory;
+use App\Reports\Support\ReportAuditLogger;
 use Illuminate\Support\ServiceProvider;
 use InvalidArgumentException;
 
@@ -55,6 +56,7 @@ final class ReportServiceProvider extends ServiceProvider
         $this->app->singleton(ModeGuard::class);
         $this->app->singleton(FilterNormalizer::class);
         $this->app->singleton(MetadataFactory::class);
+        $this->app->singleton(ReportAuditLogger::class);
         $this->app->singleton(ReportEngine::class);
     }
 

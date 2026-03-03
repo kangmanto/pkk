@@ -23,6 +23,7 @@ Catatan keputusan saat ini: endpoint legacy diabaikan; implementasi difokuskan k
    - `desa.population_summary`
    - `desa.household_welfare`
    - `kecamatan.village_recaps`
+8. Audit logging report terstruktur (`report.generated`, `report.denied`, `report.failed`).
 
 ## Integrasi ke aplikasi Laravel
 

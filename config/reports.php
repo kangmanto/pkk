@@ -26,6 +26,10 @@ return [
         'ro' => ['generate' => true],
         'rw' => ['generate' => true],
     ],
+    'audit' => [
+        'enabled' => true,
+        'log_channel' => env('REPORT_AUDIT_LOG_CHANNEL'),
+    ],
     'user_context_resolver' => \App\Reports\Support\DefaultUserContextResolver::class,
     'allowed_filters' => [
         'start_date',
