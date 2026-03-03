@@ -14,7 +14,7 @@ Catatan keputusan saat ini: endpoint legacy diabaikan; implementasi difokuskan k
    - enforce `level + area_id`
    - render via renderer manager
 3. `ReportRegistry` untuk mapping `report_code -> module`.
-4. `PdfRenderer` dan `DocxRenderer` placeholder.
+4. `PdfRenderer` (Dompdf) dan `DocxRenderer` (PHPWord) untuk output file binary.
 5. `ReportController` + route generik:
    - `/report/{code}/pdf`
    - `/report/{code}/docx`
@@ -33,7 +33,7 @@ Catatan keputusan saat ini: endpoint legacy diabaikan; implementasi difokuskan k
    - `area_level`
    - optional: `mode`, `area_name`
 3. Tambahkan modul report ke `config/reports.php`.
-4. Ganti renderer placeholder ke driver PDF/DOCX aktual saat siap produksi.
+4. Pastikan dependency composer terpasang (`dompdf/dompdf`, `phpoffice/phpword`).
 
 ## Pilot Phase 1
 
