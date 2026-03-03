@@ -35,6 +35,11 @@ Acceptance Criteria:
 2. Query complexity dan risiko tiap report didokumentasikan.
 3. Baseline output lama tersimpan untuk golden comparison.
 
+Pilihan pilot yang dieksekusi pada scaffold ini:
+1. `desa.population_summary` (kompleksitas rendah, agregasi tunggal residents).
+2. `desa.household_welfare` (kompleksitas sedang, agregasi grouped households).
+3. `kecamatan.village_recaps` (kompleksitas sedang, join areas-households per desa).
+
 ### WS1 - Fondasi Engine
 
 ID: `WS1-T01`  

@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Desa Population Summary</title>
+</head>
+<body style="font-family: Arial, sans-serif; font-size: 12px;">
+    @include('reports.partials.header', ['meta' => data_get($reportData, 'meta', [])])
+
+    <h3 style="margin:0 0 12px 0;">Ringkasan Penduduk Desa</h3>
+
+    <table style="width:100%; border-collapse: collapse;">
+        <thead>
+            <tr>
+                <th style="border:1px solid #444; text-align:left; padding:6px;">Total Penduduk</th>
+                <th style="border:1px solid #444; text-align:left; padding:6px;">Laki-laki</th>
+                <th style="border:1px solid #444; text-align:left; padding:6px;">Perempuan</th>
+            </tr>
+        </thead>
+        <tbody>
+            @forelse ((array) data_get($reportData, 'rows', []) as $row)
+                <tr>
+                    <td style="border:1px solid #444; padding:6px;">{{ data_get($row, 'total_residents', 0) }}</td>
+                    <td style="border:1px solid #444; padding:6px;">{{ data_get($row, 'male_total', 0) }}</td>
+                    <td style="border:1px solid #444; padding:6px;">{{ data_get($row, 'female_total', 0) }}</td>
+                </tr>
+            @empty
+                <tr>
+                    <td colspan="3" style="border:1px solid #444; padding:6px;">Data tidak tersedia</td>
+                </tr>
+            @endforelse
+        </tbody>
+    </table>
+</body>
+</html>
