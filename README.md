@@ -36,6 +36,24 @@ Catatan keputusan saat ini: endpoint legacy diabaikan; implementasi difokuskan k
 3. Tambahkan modul report ke `config/reports.php`.
 4. Pastikan dependency composer terpasang (`dompdf/dompdf`, `phpoffice/phpword`).
 
+## Menjalankan Aplikasi
+
+Repo ini sekarang sudah memiliki skeleton Laravel 12 lengkap (`artisan`, `bootstrap`, `public`, `config`, `storage`, `database`).
+
+Langkah run lokal:
+
+```bash
+cp .env.example .env
+php artisan key:generate
+php artisan migrate
+php artisan serve
+```
+
+Endpoint report:
+
+1. `/report/{code}/pdf`
+2. `/report/{code}/docx`
+
 ## Pilot Phase 1
 
 Endpoint baru yang siap dipakai:
