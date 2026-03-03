@@ -55,6 +55,7 @@ bash scripts/ci/check_report_scope_filters.sh
 ```
 
 CI GitHub Actions akan menjalankan guard yang sama pada `push` dan `pull_request`.
+Workflow juga menjalankan `composer install` dan seluruh `phpunit` suite.
 
 ## Test Suite WS5
 

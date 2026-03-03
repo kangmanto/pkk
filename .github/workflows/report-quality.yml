@@ -7,14 +7,31 @@ on:
       - main
 
 jobs:
-  scope-filter-guard:
+  quality-gate:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          extensions: mbstring, xml, zip, gd, fileinfo, dom
+          tools: composer:v2
+          coverage: none
+
       - name: Install ripgrep
         run: sudo apt-get update && sudo apt-get install -y ripgrep
 
+      - name: Validate composer.json
+        run: composer validate --strict
+
+      - name: Install dependencies
+        run: composer install --no-interaction --prefer-dist
+
       - name: Validate report scope filters
         run: bash scripts/ci/check_report_scope_filters.sh
+
+      - name: Run PHPUnit suite
+        run: vendor/bin/phpunit -c phpunit.xml.dist
