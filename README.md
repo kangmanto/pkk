@@ -70,6 +70,7 @@ File test yang sudah disiapkan:
    - `tests/Feature/ReportEngineAuthorizationMatrixTest.php`
    - `tests/Feature/ReportEngineErrorMappingTest.php`
    - `tests/Feature/ReportHeaderSnapshotTest.php`
+   - `tests/Feature/ReportEndpointResponseTest.php`
 3. Snapshot fixture:
    - `tests/__snapshots__/report_header.snap`
 
