@@ -2,6 +2,8 @@
 
 Implementasi awal berdasarkan `PRD.md` untuk fondasi Report Engine modular.
 
+Catatan keputusan saat ini: endpoint legacy diabaikan; implementasi difokuskan ke endpoint engine baru.
+
 ## Komponen yang sudah dibuat
 
 1. `ReportContract`, `RendererContract`, `UserContextResolverContract`.

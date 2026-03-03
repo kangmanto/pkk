@@ -11,11 +11,11 @@ Status: Ready for execution
 3. Semua query wajib filter `level + area_id`.
 4. Orientation default: `landscape`.
 5. Header metadata wajib global dan seragam.
-6. Endpoint lama dipertahankan via adapter saat transisi.
+6. Endpoint legacy diabaikan (out of scope implementasi ini).
 7. Unknown report code -> `404`.
 8. Validasi scope-role-area terpusat di engine.
 9. Phase 1 migrasi 3 report prioritas tinggi.
-10. Snapshot/golden test wajib sebelum deprecate legacy endpoint.
+10. Snapshot/golden test wajib sebelum rilis endpoint engine ke produksi.
 
 ## Work Breakdown Structure
 
@@ -116,22 +116,6 @@ Acceptance Criteria:
 2. Query 100% enforce `level + area_id`.
 3. Parity output lolos golden/snapshot test.
 
-### WS4 - Adapter Legacy Endpoint
-
-ID: `WS4-T01`  
-Task: Endpoint lama diarahkan ke engine (adapter layer).  
-Acceptance Criteria:
-1. URL lama tetap berfungsi tanpa breaking change.
-2. Jalur eksekusi endpoint lama melewati engine.
-3. Telemetri mencatat penggunaan endpoint legacy.
-
-ID: `WS4-T02`  
-Task: Tambahkan warning deprecation bertahap.  
-Acceptance Criteria:
-1. Warning deprecation muncul di log/apm.
-2. Dokumentasi migration path untuk consumer tersedia.
-3. Rencana cut-off endpoint lama punya tanggal target.
-
 ### WS5 - Quality Gate dan Security Gate
 
 ID: `WS5-T01`  
@@ -153,7 +137,7 @@ Task: Snapshot/golden test header PDF dan parity pilot.
 Acceptance Criteria:
 1. Header seragam antar report.
 2. Selisih output kritikal di luar threshold = fail.
-3. Gate ini wajib hijau sebelum deprecate controller lama.
+3. Gate ini wajib hijau sebelum rilis ke produksi.
 
 ID: `WS5-T04`  
 Task: Guard rail CI untuk query tanpa filter area.  
@@ -162,22 +146,6 @@ Acceptance Criteria:
 2. Pelanggaran rule memblok merge.
 3. Dokumentasi pengecualian tidak diperlukan karena policy tanpa pengecualian.
 
-### WS6 - Deprecation dan Cleanup
-
-ID: `WS6-T01`  
-Task: Deprecate controller report lama bertahap setelah parity.  
-Acceptance Criteria:
-1. Semua report prioritas tinggi sudah lewat engine.
-2. Tidak ada regression blocking dari monitoring.
-3. Controller legacy target batch ditandai deprecated.
-
-ID: `WS6-T02`  
-Task: Hapus endpoint/controller legacy sesuai batch cut-off.  
-Acceptance Criteria:
-1. Endpoint legacy yang sudah cut-off benar-benar dihapus.
-2. Dokumentasi route baru final.
-3. KPI pengurangan controller report >= 70% tercapai.
-
 ## Urutan Eksekusi
 
 1. `WS0` -> lock daftar report dan pilih 3 pilot.
@@ -185,8 +153,7 @@ Acceptance Criteria:
 3. `WS2` -> rilis renderer + metadata global.
 4. `WS3` -> migrasi 3 report pilot hingga parity.
 5. `WS5` -> quality gate wajib hijau.
-6. `WS4` -> adapter endpoint lama ke engine.
-7. `WS6` -> deprecate dan cleanup legacy bertahap.
+6. Rilis endpoint engine baru langsung ke produksi (tanpa adapter legacy).
 
 ## Milestone Delivery
 
@@ -208,11 +175,11 @@ Exit Criteria:
 2. Golden/snapshot test hijau.
 3. Tidak ada leak lintas area.
 
-M4: Legacy transition (`WS4 + WS6`)  
+M4: Production rollout (No legacy adapter)  
 Exit Criteria:
-1. Endpoint lama melewati engine.
-2. Deprecation berjalan aman.
-3. Pengurangan controller >= 70%.
+1. Endpoint engine baru aktif di produksi.
+2. Monitoring tidak menunjukkan pelanggaran scope-role-area.
+3. Golden/snapshot gate tetap hijau setelah rilis.
 
 ## Definition of Ready per Task
 
